@@ -28,5 +28,5 @@ echo $vm
 
 done
 
-#Retention
-find /vmfs/volumes/ad2cb76d-7a43d63f/New/* -type d -mtime +[days] -exec rm -rf {} \;
+#Retention - change "days" on numer - 1 (one day), 2 (two days), etc
+find /patch/to/backup/* -type d -mtime +[days] -exec rm -rf {} \;
