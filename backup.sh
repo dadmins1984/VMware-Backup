@@ -1,7 +1,14 @@
 #!/bin/bash
+#config:
 
-#VM Names
+#1 VM Names
 vms="vm1 vm2 vm3"
+
+#2 VMs patch
+vmpatch="/vmfs/volumes/xxxxxx"
+
+#3 Backup patch
+bacpatch="/xxx/xxxx/xxx"
     
 for vm in $vms
 do
@@ -15,18 +22,18 @@ echo $vm
     
     #Create backup folder
     backup_folder="Backup-$vm-$(date +%Y-%m-%d)"
-    mkdir /vmfs/volumes/ad2cb76d-7a43d63f/New/$backup_folder
+    mkdir $bacpatch/$backup_folder
 
     #Copy config
-    cp /path/to/$vm/$vm.vmx /path/to/backup/$backup_folder
+    cp $vmpatch/$vm/$vm.vmx $bacpatch/$backup_folder
 
     #Copy HDD
-    vmkfstools -i /patch/to/$vm/$vm.vmdk /patch/to/backup/$backup_folder/$vm.vmdk -d thin
+    vmkfstools -i $vmpatch/$vm/$vm.vmdk $bacpatch/$backup_folder/$vm.vmdk -d thin
 
-    # emove snapchat    
+    # remove snapchat    
     vim-cmd vmsvc/snapshot.remove $id $(vim-cmd vmsvc/snapshot.get $id | grep Id | cut -d":" -f 2 | cut -c2-)
 
 done
 
 #Retention - change "days" on numer - 1 (one day), 2 (two days), etc
-find /patch/to/backup/* -type d -mtime +[days] -exec rm -rf {} \;
+find $bacpatch/backup/* -type d -mtime +[days] -exec rm -rf {} \;
