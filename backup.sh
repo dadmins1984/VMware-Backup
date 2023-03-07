@@ -1,6 +1,6 @@
 #!/bin/bash
-#config:
 
+#config:
 #1 VM Names
 vms="vm1 vm2 vm3"
 
