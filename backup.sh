@@ -8,7 +8,7 @@ vms="vm1 vm2 vm3"
 vmpatch="/vmfs/volumes/xxxxxx"
 
 #3 Backup patch
-bacpatch="/xxx/xxxx/xxx"
+bacpatch="/vmfs/volumes/xxxxxx"
     
 for vm in $vms
 do
